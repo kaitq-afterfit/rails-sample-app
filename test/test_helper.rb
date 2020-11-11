@@ -15,4 +15,11 @@ class ActiveSupport::TestCase
   def is_logged_in?
     !session[:user_id].nil?
   end
+
+  # NOTE: Helper method for logging in as a test user
+  # (in order to PASS users_edit_test)
+  def log_in_as(user, password: 'password')
+    post login_path, params: { session: { email: user.email, 
+                                          password: password } }
+  end
 end
